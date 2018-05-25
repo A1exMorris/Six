@@ -31,7 +31,6 @@ class Router
         }
     }
 
-
     /**
      *
      */
@@ -44,23 +43,37 @@ class Router
         foreach ($this->routes as $uriPattern => $path)
         {
           if(preg_match("~$uriPattern~",$uri)){
-              $segments=explode('/',$path);
+              //Если есть то определить какой контроллер и action
+              $internalRoute=preg_replace("~$uriPattern~",$path,$uri);
+            //Получаем внутренний маршрут
+              $segments=explode('/',$internalRoute);
+
+
+                //DeleteRoute folder if 1 server for two projects
+              $deleteRoute=array_shift($segments);
+
+
+                //Получаем контроллер
               $controllerName=array_shift($segments).'Controller';
               $controllerName=ucfirst($controllerName);
 
+                //Получаем action
               $actionName='action'.ucfirst(array_shift($segments));
 
               $controllerFile=ROOT.'/controllers/'.$controllerName.'.php';
+              $parametrs=$segments;
 
               //Подключить файл класса контроллера
-
               if(file_exists($controllerFile))
               {
                   include_once ($controllerFile);
               }
-              $controllerObject=new $controllerName;
 
-              $result=$controllerObject->$actionName();
+              //Создать объект и вызвать нужный метод
+              $controllerObject=new $controllerName;
+              $result=call_user_func_array(array($controllerObject,$actionName),$parametrs);
+
+
               if($result!=null)
               {
                   break;
@@ -69,11 +82,11 @@ class Router
           };
         }
 
-        //Если есть то определить какой контроллер и action
 
 
 
-        //Создать объект и вызвать нужный метод
+
+
 
 
     }

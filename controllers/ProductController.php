@@ -9,9 +9,16 @@
 class ProductController
 {
 
-    public function actionList()
+    public function actionView()
+    {
+        echo 'actionView run';
+        return true;
+    }
+
+    public function actionList($category)
     {
         echo 'actionList run';
+        echo '<br>'.$category;
         return true;
     }
 
