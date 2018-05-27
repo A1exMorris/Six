@@ -6,9 +6,9 @@
  * Time: 19:22
  */
 return array(
-    'host'=>'localhost',
-    'dbname'=>'newsforsite',
-    'user'=>'root',
-    'password'=>''
+    'host'=>'nphotography.ru',
+    'dbname'=>'u0418281_default',
+    'user'=>'u0418281_dev',
+    'password'=>'Agent007'
 
 );

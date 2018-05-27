@@ -22,7 +22,7 @@ class News
         $newsList=array();
 
         if( $result=$mysql->query('SELECT id, title, date, short_content '
-            .'FROM news WHERE id='.$id
+            .'FROM nphotography WHERE id='.$id
         ))
         {
             while ($row = $result->fetch_assoc()) {
@@ -50,7 +50,7 @@ class News
         $newsList=array();
 
         if( $result=$mysql->query('SELECT id, title, date, short_content '
-            .'FROM news '
+            .'FROM nphotography '
             .'ORDER BY date DESC '
             .'LIMIT 10'
         ))
